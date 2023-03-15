@@ -7,6 +7,6 @@
     <title>FLASHBACK</title>
 </head>
 <body>
-    음 메인 php 페이지를 하나 더 만들어야겠다ㅋㅋㅋㅋㅋ
+    
 </body>
 </html>
