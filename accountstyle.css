@@ -1,0 +1,6 @@
+.account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: hsla(47, 58%, 57%, 0.3);
+}
