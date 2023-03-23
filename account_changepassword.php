@@ -1,49 +1,27 @@
-<html>
-<head>
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Password</title>
-</head>
-</head>
-<body>
-    <div class="phppot-container tile-container">
-        <form name="frmChange" method="post" action=""
-            onSubmit="return validatePassword()">
+<?php
+session_start();
+$_SESSION["userId"] = "1";
+$conn = mysqli_connect("localhost", "root", "", "password_change");
+if (count($_POST) > 0) {
 
-            <div class="validation-message text-center"><?php if(isset($message)) { echo $message; } ?></div>
-            <h2 class="text-center">Change Password</h2>
-            <div>
-                <div class="row">
-                    <label class="inline-block">Current Password</label>
-                    <span id="currentPassword"
-                        class="validation-message"></span> <input
-                        type="password" name="currentPassword"
-                        class="full-width">
+    $sql = "SELECT * FROM users WHERE userId= ?";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param('i', $_SESSION["userId"]);
+    $statement->execute();
+    $result = $statement->get_result();
+    $row = $result->fetch_assoc();
 
-                </div>
-                <div class="row">
-                    <label class="inline-block">New Password</label> <span
-                        id="newPassword" class="validation-message"></span><input
-                        type="password" name="newPassword"
-                        class="full-width">
-
-                </div>
-                <div class="row">
-                    <label class="inline-block">Confirm Password</label>
-                    <span id="confirmPassword"
-                        class="validation-message"></span><input
-                        type="password" name="confirmPassword"
-                        class="full-width">
-
-                </div>
-                <div class="row">
-                    <input type="submit" name="submit" value="Submit"
-                        class="full-width">
-                </div>
-            </div>
-
-        </form>
-    </div>
-</body>
-</html>
+    if (! empty($row)) {
+        $hashedPassword = $row["password"];
+        $password = PASSWORD_HASH($_POST["newPassword"], PASSWORD_DEFAULT);
+        if (password_verify($_POST["currentPassword"], $hashedPassword)) {
+            $sql = "UPDATE users set password=? WHERE userId=?";
+            $statement = $conn->prepare($sql);
+            $statement->bind_param('si', $password, $_SESSION["userId"]);
+            $statement->execute();
+            $message = "Password Changed";
+        } else
+            $message = "Current Password is not correct";
+    }
+}
+?>
