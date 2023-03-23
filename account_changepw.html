@@ -1,34 +1,18 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Password</title>
+	<title>Change Password</title>
 </head>
 <body>
-    <h1>Change Password</h1>
-   <form method="POST" action="password_change.php">
-    <table>
-    <tr>
-   <td>Enter your UserName</td>
-    <td><input type="username" size="10" name="username"></td>
-    </tr>
-    <tr>
-    <td>Enter your existing password:</td>
-    <td><input type="password" size="10" name="password"></td>
-    </tr>
-  <tr>
-    <td>Enter your new password:</td>
-    <td><input type="password" size="10" name="newpassword"></td>
-    </tr>
-    <tr>
-   <td>Re-enter your new password:</td>
-   <td><input type="password" size="10" name="confirmnewpassword"></td>
-    </tr>
-    </table>
-    <p><input type="submit" value="Update Password">
-    </form>
-   <p><a href="home.php">Home</a>
-   <p><a href="logout.php">Logout</a>
-   </body>
-    </html>  
+	<h2>비밀번호 변경</h2>
+	<form action="change_password.php" method="post">
+		<label>현재 비밀번호: </label>
+		<input type="password" name="current_password"><br>
+		<label>새로운 비밀번호: </label>
+		<input type="password" name="new_password"><br>
+		<label>비밀번호 확인: </label>
+		<input type="password" name="confirm_password"><br>
+		<input type="submit" value="변경">
+	</form>
+</body>
+</html>
