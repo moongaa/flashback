@@ -1,27 +1,31 @@
 <?php
 session_start();
-$_SESSION["userId"] = "1";
-$conn = mysqli_connect("localhost", "root", "", "password_change");
-if (count($_POST) > 0) {
+include 'dbconfig.php';
 
-    $sql = "SELECT * FROM users WHERE userId= ?";
-    $statement = $conn->prepare($sql);
-    $statement->bind_param('i', $_SESSION["userId"]);
-    $statement->execute();
-    $result = $statement->get_result();
-    $row = $result->fetch_assoc();
+$username = $_POST['username'];
+        $password = $_POST['password'];
+        $newpassword = $_POST['newpassword'];
+        $confirmnewpassword = $_POST['confirmnewpassword'];
+        $result = mysql_query("SELECT password FROM user_info WHERE 
+user_id='$username'");
+        if(!$result)
+        {
+        echo "The username you entered does not exist";
+        }
+        else if($password!= mysql_result($result, 0))
+        {
+        echo "You entered an incorrect password";
+        }
+        if($newpassword=$confirmnewpassword)
+        $sql=mysql_query("UPDATE user_info SET password='$newpassword' where 
 
-    if (! empty($row)) {
-        $hashedPassword = $row["password"];
-        $password = PASSWORD_HASH($_POST["newPassword"], PASSWORD_DEFAULT);
-        if (password_verify($_POST["currentPassword"], $hashedPassword)) {
-            $sql = "UPDATE users set password=? WHERE userId=?";
-            $statement = $conn->prepare($sql);
-            $statement->bind_param('si', $password, $_SESSION["userId"]);
-            $statement->execute();
-            $message = "Password Changed";
-        } else
-            $message = "Current Password is not correct";
-    }
-}
-?>
+ user_id='$username'");
+        if($sql)
+        {
+        echo "Congratulations You have successfully changed your password";
+        }
+       else
+        {
+       echo "Passwords do not match";
+       }
+      ?>
