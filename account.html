@@ -4,26 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
-
-
+    <title>FLASHBACK</title>
 </head>
 <body>
-    <nav class="account">
-        <div style="display: flex;justify-content: space-between;
-        align-items: center;background-color: hsla(47, 58%, 57%, 0.3);">
-        <div class="account_logo">
-            <a href="">FLASHBACK</a>
-
+    <link rel="stylesheet" href="css/main.css">
+    <div class="container">
+        <div class="header">
+            <form name="상단바" action="메인페이지로" method="post">
+                <input class="Flashback" type="button" name="아이디값" value="FlashBack">
+            </form>
+            <form name="상단바" action="비밀번호변경페이지로" method="post">
+                <input class="top-button" type="button" name="아이디값" value="Change Password">
+            </form>
+            <form name="상단바" action="이름변경페이지로" method="post">
+                <input class="top-button" type="button" name="아이디값" value="Change Nickname">
+            </form>
+            <form name="상단바" action="로그아웃창띄우기" method="post">
+                <input class="top-button" type="button" name="아이디값" value="Logout">
+            </form>
+            
         </div>
-        <ul class="account_menu">
-            <div style="width:97%;height:80px;margin:20px">
-            <li><a href="">Change Password</a></li>
-            <li><a href="">Change Nickname</a></li>
-            <li><a href="">Logout</a></li>
-        </ul>
-   </div>
-   </div>
-</nav>
-</body> 
+        <div class="content">
+            <IMG class="image" src="img/빛나는밤.jpg" width="60%" alt="My Image">
+        </div>
+        <div class="footer">
+            더보기
+        </div>
+    </div>
+</body>
 </html>
