@@ -1,15 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "database_name";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+include 'CreateDB.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
   $sql = "UPDATE users SET nickname='$new_nickname' WHERE nickname='$current_nickname'";
-  $result = mysqli_query($conn, $sql);
+  $result = mysqli_query($connect, $sql);
 
 
   if ($result) {
